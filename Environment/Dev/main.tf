@@ -14,7 +14,7 @@ provider "aws" {
 
 # Backend Module
 module "backend" {
-  source      = "git::ssh://git@github.com/s11kyin/s11-module.git//modules/backend?ref=main"
+  source      = "git::ssh://git@github.com/s11kyin/s11-module.git//backend?ref=main"
   bucket_name = var.state_bucket_name
   table_name  = var.dynamodb_table_name
   environment = var.environment
@@ -22,7 +22,7 @@ module "backend" {
 
 # VPC Module
 module "vpc" {
-  source              = "git::ssh://git@github.com/s11kyin/s11-module.git//modules/vpc?ref=main"
+  source              = "git::ssh://git@github.com/s11kyin/s11-module.git//vpc?ref=main"
   vpc_cidr            = var.vpc_cidr
   public_subnet_cidr  = var.public_subnet_cidr
   private_subnet_cidr = var.private_subnet_cidr
@@ -32,14 +32,14 @@ module "vpc" {
 
 # S3 Module
 module "s3" {
-  source      = "git::ssh://git@github.com/s11kyin/s11-module.git//modules/s3?ref=main"
+  source      = "git::ssh://git@github.com/s11kyin/s11-module.git//s3?ref=main"
   bucket_name = var.app_bucket_name
   environment = var.environment
 }
 
 # EC2 Module
 module "ec2" {
-  source            = "git::ssh://git@github.com/s11kyin/s11-module.git//modules/ec2?ref=main"
+  source            = "git::ssh://git@github.com/s11kyin/s11-module.git//ec2?ref=main"
   environment       = var.environment
   vpc_id            = module.vpc.vpc_id
   public_subnet_id  = module.vpc.public_subnet_id
